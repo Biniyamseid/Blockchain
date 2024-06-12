@@ -23,8 +23,10 @@ The `ERC20` contract is an implementation of the ERC20 token standard. It provid
 The `BinisToken` contract is the main token contract that inherits from `ERC20`. It sets the name and symbol of the token in its constructor and mints an initial supply of 50 tokens to the deployer's address.
 
 ## Screenshots <a name="screenshots"></a>
+![alt text](image.png)
+![alt text](image-1.png)
 
-Insert screenshots here to demonstrate the contract in action, such as deploying the contract, minting tokens, transferring tokens, etc.
+
 
 ## License <a name="license"></a>
 
