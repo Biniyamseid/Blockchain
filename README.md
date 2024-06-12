@@ -24,15 +24,15 @@ The `BinisToken` contract is the main token contract that inherits from `ERC20`.
 
 ## Screenshots <a name="screenshots"></a>
 ![alt text](image.png)
+
 ![alt text](image-1.png)
+
 ![alt text](image-2.png)
 
 
 
 ## License <a name="license"></a>
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
-
-In the "Screenshots" section, you would want to include actual screenshots of the contract being deployed and interacting with it using a tool like Remix or a wallet like MetaMask.
