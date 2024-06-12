@@ -25,6 +25,7 @@ The `BinisToken` contract is the main token contract that inherits from `ERC20`.
 ## Screenshots <a name="screenshots"></a>
 ![alt text](image.png)
 ![alt text](image-1.png)
+![alt text](image-2.png)
 
 
 
