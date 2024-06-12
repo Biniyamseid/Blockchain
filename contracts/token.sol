@@ -57,11 +57,15 @@ abstract contract ERC20 is Ownable {
     uint256 private _totalSupply;
     string private _name;
     string private _symbol;
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+
 
     constructor(string memory name_, string memory symbol_) Ownable(msg.sender) {
         _name = name_;
         _symbol = symbol_;
     }
+    event Transfer(address indexed from, address indexed to, uint256 value);
+
 
     function name() public view virtual returns (string memory) {
         return _name;
@@ -104,32 +108,59 @@ abstract contract ERC20 is Ownable {
     }
 
     function _transfer(address from, address to, uint256 value) internal virtual {
-        // implementation
+        require(from != address(0), "ERC20: transfer from the zero address");
+        require(to != address(0), "ERC20: transfer to the zero address");
+
+        uint256 senderBalance = _balances[from];
+        require(senderBalance >= value, "ERC20: transfer amount exceeds balance");
+        _balances[from] = senderBalance - value;
+        _balances[to] += value;
+
+        emit Transfer(from, to, value);
     }
 
     function _update(address from, address to, uint256 value) internal virtual {
-        // implementation
+        // No additional logic needed for this contract
     }
 
     function _mint(address account, uint256 value) internal virtual {
-        // implementation
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        _totalSupply += value;
+        _balances[account] += value;
+        emit Transfer(address(0), account, value);
     }
 
     function _burn(address account, uint256 value) internal virtual {
-        // implementation
+        require(account != address(0), "ERC20: burn from the zero address");
+
+        uint256 accountBalance = _balances[account];
+        require(accountBalance >= value, "ERC20: burn amount exceeds balance");
+        _balances[account] = accountBalance - value;
+        _totalSupply -= value;
+
+        emit Transfer(account, address(0), value);
     }
 
     function _approve(address owner, address spender, uint256 value) internal virtual {
-        // implementation
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        _allowances[owner][spender] = value;
+        emit Approval(owner, spender, value);
     }
 
     function _spendAllowance(address owner, address spender, uint256 value) internal virtual {
-        // implementation
+        uint256 currentAllowance = _allowances[owner][spender];
+        require(currentAllowance >= value, "ERC20: transfer amount exceeds allowance");
+
+        unchecked {
+            _approve(owner, spender, currentAllowance - value);
+        }
     }
 }
 
-
-// TheodoresToken contract
+// BinisToken contract
 contract BinisToken is ERC20 {
     constructor() ERC20("Theodores Token", "TT") {
         _mint(msg.sender, 50 * 10**18);
